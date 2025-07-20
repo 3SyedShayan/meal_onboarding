@@ -37,7 +37,7 @@ migrate_working_dir/
 /macos
 /test
 /web
-
+/lib/widgets/circular_button.dart
 
 # Symbolication related
 app.*.symbols

@@ -1,4 +1,4 @@
-import 'package:burger_onboarding/container.dart';
+import 'package:burger_onboarding/widgets/container.dart';
 import 'package:flutter/material.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -10,7 +10,6 @@ class OnBoarding extends StatefulWidget {
 
 class _OnBoardingState extends State<OnBoarding> {
   Widget onboardContainer(int b1, int b2, int b3) {
-    print("Container color is $b1, $b2, $b3");
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -24,7 +23,7 @@ class _OnBoardingState extends State<OnBoarding> {
   }
 
   int slide = 1;
-  int b1 = 1, b2 = 0, b3 = 0; // Store the container colors
+  int b1 = 1, b2 = 0, b3 = 0;
 
   String image = 'assets/images/1.jpg';
   void onBoardChange() {
@@ -59,10 +58,17 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     Widget onboardingAction = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TextButton(onPressed: () {}, child: Text('Get Started')),
         TextButton(
+          onPressed: () {
+            slide = 3;
+            onBoardChange();
+          },
+          child: Text('Skip'),
+        ),
+        TextButton.icon(
+          label: Text('Next'),
           onPressed: () {
             if (slide < 3) {
               slide = slide + 1;
@@ -72,7 +78,8 @@ class _OnBoardingState extends State<OnBoarding> {
               onBoardChange();
             }
           },
-          child: Text('Next'),
+          icon: Icon(Icons.arrow_forward),
+          iconAlignment: IconAlignment.end,
         ),
       ],
     );
@@ -94,22 +101,21 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
           Column(
             children: [
-              SizedBox(height: 50), // Space for the top bar
+              SizedBox(height: 400),
               Center(
                 child: Container(
+                  padding: const EdgeInsets.all(25.0),
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 248, 120, 1),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(40),
                   ),
                   width: 300,
-                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'We serve\nincomparable\ndelicacies',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),
@@ -117,14 +123,12 @@ class _OnBoardingState extends State<OnBoarding> {
                       ),
                       Text(
                         "All the best restaurants with their top menu waiting for you, they can't wait for your order!!",
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 16,
-                          fontStyle: FontStyle.italic,
-                        ),
+                        style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
+                      SizedBox(height: 15),
                       onboardContainer(b1, b2, b3),
+                      SizedBox(height: 70),
                       onboardingAction,
                     ],
                   ),

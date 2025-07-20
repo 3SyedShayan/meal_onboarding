@@ -7,7 +7,9 @@ final theme = ThemeData().copyWith(
     bodyMedium: TextStyle(color: Colors.white),
     bodySmall: TextStyle(color: Colors.white),
   ),
-  buttonTheme: ButtonThemeData(buttonColor: Colors.white),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(foregroundColor: Colors.white),
+  ),
 );
 void main() {
   runApp(const MyApp());
