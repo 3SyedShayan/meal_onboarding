@@ -1,0 +1,139 @@
+import 'package:burger_onboarding/container.dart';
+import 'package:flutter/material.dart';
+
+class OnBoarding extends StatefulWidget {
+  const OnBoarding({super.key});
+
+  @override
+  State<OnBoarding> createState() => _OnBoardingState();
+}
+
+class _OnBoardingState extends State<OnBoarding> {
+  Widget onboardContainer(int b1, int b2, int b3) {
+    print("Container color is $b1, $b2, $b3");
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ContainerBox(color: b1),
+        SizedBox(width: 8),
+        ContainerBox(color: b2),
+        SizedBox(width: 8),
+        ContainerBox(color: b3),
+      ],
+    );
+  }
+
+  int slide = 1;
+  int b1 = 1, b2 = 0, b3 = 0; // Store the container colors
+
+  String image = 'assets/images/1.jpg';
+  void onBoardChange() {
+    if (slide == 1) {
+      image = 'assets/images/1.jpg';
+      setState(() {
+        b1 = 1;
+        b2 = 0;
+        b3 = 0;
+        slide = 1;
+      });
+    } else if (slide == 2) {
+      image = 'assets/images/2.jpg';
+      setState(() {
+        b1 = 0;
+        b2 = 1;
+        b3 = 0;
+        slide = 2;
+      });
+    } else if (slide == 3) {
+      image = 'assets/images/3.jpg';
+      setState(() {
+        b1 = 0;
+        b2 = 0;
+        b3 = 1;
+        slide = 3;
+      });
+    }
+    print("Slide Number is $slide");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget onboardingAction = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextButton(onPressed: () {}, child: Text('Get Started')),
+        TextButton(
+          onPressed: () {
+            if (slide < 3) {
+              slide = slide + 1;
+              onBoardChange();
+            } else {
+              slide = 5;
+              onBoardChange();
+            }
+          },
+          child: Text('Next'),
+        ),
+      ],
+    );
+
+    if (slide == 3) {
+      onboardingAction = IconButton(
+        onPressed: () {},
+        icon: Icon(Icons.arrow_forward),
+      );
+    }
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image.asset(
+            image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Column(
+            children: [
+              SizedBox(height: 50), // Space for the top bar
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 248, 120, 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  width: 300,
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'We serve\nincomparable\ndelicacies',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "All the best restaurants with their top menu waiting for you, they can't wait for your order!!",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      onboardContainer(b1, b2, b3),
+                      onboardingAction,
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
