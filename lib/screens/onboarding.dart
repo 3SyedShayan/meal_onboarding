@@ -1,4 +1,4 @@
-import 'package:burger_onboarding/widgets/circular_button.dart';
+import 'package:burger_onboarding/widgets/arc_painter.dart';
 import 'package:burger_onboarding/widgets/container.dart';
 import 'package:flutter/material.dart';
 
@@ -71,13 +71,8 @@ class _OnBoardingState extends State<OnBoarding> {
         TextButton.icon(
           label: Text('Next'),
           onPressed: () {
-            if (slide < 3) {
-              slide = slide + 1;
-              onBoardChange();
-            } else {
-              slide = 5;
-              onBoardChange();
-            }
+            slide = slide + 1;
+            onBoardChange();
           },
           icon: Icon(Icons.arrow_forward),
           iconAlignment: IconAlignment.end,
@@ -100,7 +95,7 @@ class _OnBoardingState extends State<OnBoarding> {
           child: IconButton(
             onPressed: () {
               if (slide > 1) {
-                slide = slide - 1;
+                slide = 1;
                 onBoardChange();
               }
             },
