@@ -1,3 +1,4 @@
+import 'package:burger_onboarding/widgets/circular_button.dart';
 import 'package:burger_onboarding/widgets/container.dart';
 import 'package:flutter/material.dart';
 
@@ -85,9 +86,29 @@ class _OnBoardingState extends State<OnBoarding> {
     );
 
     if (slide == 3) {
-      onboardingAction = IconButton(
-        onPressed: () {},
-        icon: Icon(Icons.arrow_forward),
+      onboardingAction = CustomPaint(
+        size: Size(50, 50),
+        painter: ArcPainter(),
+        child: Container(
+          margin: EdgeInsets.all(15),
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+          ),
+          child: IconButton(
+            onPressed: () {
+              if (slide > 1) {
+                slide = slide - 1;
+                onBoardChange();
+              }
+            },
+            icon: Icon(Icons.arrow_forward),
+
+            color: Color.fromARGB(255, 248, 120, 1),
+          ),
+        ),
       );
     }
     return Scaffold(
